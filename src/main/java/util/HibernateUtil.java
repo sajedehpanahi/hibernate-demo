@@ -8,20 +8,26 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory = BuildSessionFactory();
+    private static final SessionFactory sessionFactory = buildSessionFactory();
 
-    private static SessionFactory BuildSessionFactory() {
+    private static SessionFactory buildSessionFactory() {
         try{
-            Configuration configuration = new Configuration();
+            Configuration configuration = new Configuration().configure();
             configuration.addAnnotatedClass(GrantCondition.class);
-            return configuration.buildSessionFactory(new StandardServiceRegistryBuilder().build());
+            StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+            return configuration.buildSessionFactory(registryBuilder.build());
         }catch (Exception e){
             e.printStackTrace();
-            throw new RuntimeException("there was an error building factory!");
+            throw new RuntimeException("there was an error building factory!" + e.getMessage());
         }
     }
 
     public static SessionFactory getSessionFactory(){
         return sessionFactory;
+    }
+
+    @Override
+    protected  void finalize(){
+
     }
 }

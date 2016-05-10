@@ -1,11 +1,12 @@
 package entities;
 
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 @Entity
-@Table(name="grant_condition_table")
-public class GrantCondition {
+@Table(name="GRANT_CONDITION_TABLE")
+public class GrantCondition implements Serializable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,16 @@ public class GrantCondition {
     @Column(name = "MAX_AMOUNT")
     private BigDecimal maxAmount;
 
+
+    public int getGrantId() {
+        return grantId;
+    }
+
+    public void setGrantId(int grantId) {
+        this.grantId = grantId;
+    }
+
+    //@Column(name = "GRANT_NAME")
     public String getGrantName() {
         return grantName;
     }
@@ -30,6 +41,7 @@ public class GrantCondition {
         this.grantName = grantName;
     }
 
+    //@Column(name = "MIN_DURATION")
     public int getMinDuration() {
         return minDuration;
     }
@@ -38,6 +50,7 @@ public class GrantCondition {
         this.minDuration = minDuration;
     }
 
+    //@Column(name = "MAX_DURATION")
     public int getMaxDuration() {
         return maxDuration;
     }
@@ -46,6 +59,7 @@ public class GrantCondition {
         this.maxDuration = maxDuration;
     }
 
+    //@Column(name = "MIN_AMOUNT")
     public BigDecimal getMinAmount() {
         return minAmount;
     }
@@ -54,6 +68,7 @@ public class GrantCondition {
         this.minAmount = minAmount;
     }
 
+    //@Column(name = "MAX_AMOUNT")
     public BigDecimal getMaxAmount() {
         return maxAmount;
     }
@@ -62,7 +77,4 @@ public class GrantCondition {
         this.maxAmount = maxAmount;
     }
 
-    public GrantCondition(int grantId) {
-        this.grantId = grantId;
-    }
 }
