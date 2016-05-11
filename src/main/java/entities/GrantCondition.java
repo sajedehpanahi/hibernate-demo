@@ -3,26 +3,43 @@ package entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+
 @Entity
-@Table(name="GRANT_CONDITION_TABLE")
+@Table(name = "GRANT_CONDITION_TABLE")
 public class GrantCondition implements Serializable {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="GRANT_ID")
+    @GeneratedValue
+    @Column(name = "GRANT_ID", nullable = false)
     private int grantId;
-    @Column(name = "GRANT_NAME")
+
+    @Column(name = "GRANT_NAME", nullable = false)
     private String grantName;
-    @Column(name = "MIN_DURATION")
+
+    @Column(name = "MIN_DURATION", nullable = false)
     private int minDuration;
-    @Column(name = "MAX_DURATION")
+
+    @Column(name = "MAX_DURATION", nullable = false)
     private int maxDuration;
-    @Column(name = "MIN_AMOUNT")
+
+    @Column(name = "MIN_AMOUNT", nullable = false)
     private BigDecimal minAmount;
-    @Column(name = "MAX_AMOUNT")
+
+    @Column(name = "MAX_AMOUNT", nullable = false)
     private BigDecimal maxAmount;
 
+    @ManyToOne(fetch=FetchType.LAZY, cascade = { CascadeType.ALL })
+    @JoinColumn(name = "LOAN_ID", nullable = false)
+    private LoanType loanType;
+
+
+    public GrantCondition(String grantName, int minDuration, int maxDuration, BigDecimal minAmount, BigDecimal maxAmount) {
+        this.grantName = grantName;
+        this.minDuration = minDuration;
+        this.maxDuration = maxDuration;
+        this.minAmount = minAmount;
+        this.maxAmount = maxAmount;
+    }
 
     public int getGrantId() {
         return grantId;
@@ -32,7 +49,6 @@ public class GrantCondition implements Serializable {
         this.grantId = grantId;
     }
 
-    //@Column(name = "GRANT_NAME")
     public String getGrantName() {
         return grantName;
     }
@@ -41,7 +57,6 @@ public class GrantCondition implements Serializable {
         this.grantName = grantName;
     }
 
-    //@Column(name = "MIN_DURATION")
     public int getMinDuration() {
         return minDuration;
     }
@@ -50,7 +65,6 @@ public class GrantCondition implements Serializable {
         this.minDuration = minDuration;
     }
 
-    //@Column(name = "MAX_DURATION")
     public int getMaxDuration() {
         return maxDuration;
     }
@@ -59,7 +73,6 @@ public class GrantCondition implements Serializable {
         this.maxDuration = maxDuration;
     }
 
-    //@Column(name = "MIN_AMOUNT")
     public BigDecimal getMinAmount() {
         return minAmount;
     }
@@ -68,7 +81,6 @@ public class GrantCondition implements Serializable {
         this.minAmount = minAmount;
     }
 
-    //@Column(name = "MAX_AMOUNT")
     public BigDecimal getMaxAmount() {
         return maxAmount;
     }
@@ -77,4 +89,11 @@ public class GrantCondition implements Serializable {
         this.maxAmount = maxAmount;
     }
 
+    public LoanType getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(LoanType loanType) {
+        this.loanType = loanType;
+    }
 }
