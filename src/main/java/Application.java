@@ -29,7 +29,7 @@ public class Application {
                 grantConditions.add(grantCondition);
             }
 
-            LoanType loanType = new LoanType("laon name",2.4F,grantConditions);
+            LoanType loanType = new LoanType("loan name",2.4F,grantConditions);
             session.save(loanType);
 
             for (GrantCondition grantCondition: grantConditions){
@@ -37,7 +37,9 @@ public class Application {
                 session.save(grantCondition);
             }
 
-            LoanFile loanFile = new LoanFile("customernumber123456",loanType,24,new BigDecimal(52));
+            LoanFile loanFile = new LoanFile(loanType,24,new BigDecimal(52));
+            loanFile.setRealCustomer(realCustomer);
+            //new RealCustomer("customer first name", "last name", "father name", "date of birth", "national code 2121")
             session.save(loanFile);
 
             session.getTransaction().commit();

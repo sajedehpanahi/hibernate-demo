@@ -12,9 +12,6 @@ public class LoanFile {
     @Column(name = "LOAN_FILE_ID", nullable = false)
     private int loanFileId;
 
-    @Column(name = "CUSTOMER_NUMBER", nullable = false)
-    private String customerNumber;
-
     @ManyToOne(fetch= FetchType.LAZY, cascade = { CascadeType.ALL })
     @JoinColumn(name = "LOAN_ID", nullable = false)
     private LoanType loanType;
@@ -25,22 +22,33 @@ public class LoanFile {
     @Column(name = "AMOUNT", nullable = false)
     private BigDecimal amount;
 
+    @ManyToOne(fetch= FetchType.LAZY, cascade = { CascadeType.ALL })
+    @JoinColumn(name = "CUSTOMER_ID", nullable = false)
+    private RealCustomer realCustomer;
+
+    public int getLoanFileId() {
+        return loanFileId;
+    }
+
+    public void setLoanFileId(int loanFileId) {
+        this.loanFileId = loanFileId;
+    }
+
+    public RealCustomer getRealCustomer() {
+        return realCustomer;
+    }
+
+    public void setRealCustomer(RealCustomer realCustomer) {
+        this.realCustomer = realCustomer;
+    }
+
     public LoanFile() {
     }
 
-    public LoanFile(String customerNumber, LoanType loanType, int duration, BigDecimal amount) {
-        this.customerNumber = customerNumber;
+    public LoanFile(LoanType loanType, int duration, BigDecimal amount) {
         this.loanType = loanType;
         this.duration = duration;
         this.amount = amount;
-    }
-
-    public String getCustomerNumber() {
-        return customerNumber;
-    }
-
-    public void setCustomerNumber(String customerNumber) {
-        this.customerNumber = customerNumber;
     }
 
     public LoanType getLoanType() {

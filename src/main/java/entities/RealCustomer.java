@@ -1,9 +1,8 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "REAL_CUSTOMER")
@@ -24,6 +23,9 @@ public class RealCustomer extends Customer {
 
     @Column(name = "NATIONAL_CODE", nullable = false)
     private String nationalCode;
+
+    @OneToMany(mappedBy = "realCustomer")
+    private Set<LoanFile> loanFiles = new HashSet<LoanFile>(0);
 
     public RealCustomer(String firstName, String lastName, String fatherName, String dateOfBirth, String nationalCode) {
         this.firstName = firstName;
@@ -73,4 +75,11 @@ public class RealCustomer extends Customer {
         this.nationalCode = nationalCode;
     }
 
+    public Set<LoanFile> getLoanFiles() {
+        return loanFiles;
+    }
+
+    public void setLoanFiles(Set<LoanFile> loanFiles) {
+        this.loanFiles = loanFiles;
+    }
 }

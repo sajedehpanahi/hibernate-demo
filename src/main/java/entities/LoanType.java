@@ -57,4 +57,24 @@ public class LoanType implements Serializable {
     public void setGrantConditions(HashSet<GrantCondition> grantConditions) {
         this.grantConditions = grantConditions;
     }
+
+    public int getLoanId() {
+        return loanId;
+    }
+
+    public void setLoanId(int loanId) {
+        this.loanId = loanId;
+    }
+
+    public void setGrantConditions(Set<GrantCondition> grantConditions) {
+        this.grantConditions = grantConditions;
+    }
+
+    public Set<LoanFile> getLoanFiles() {
+        return loanFiles;
+    }
+
+    public void setLoanFiles(Set<LoanFile> loanFiles) {
+        this.loanFiles = loanFiles;
+    }
 }
